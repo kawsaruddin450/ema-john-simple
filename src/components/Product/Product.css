@@ -1,0 +1,17 @@
+.product {
+    border: 1px solid #95A0A7;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.price-title {
+    font-weight: normal;
+}
+
+.product-cart-btn {
+    border-radius: 0px 0px 8px 8px;
+    border: 1px solid #95A0A7;
+    background: #FFE0B3;
+    color: black;
+    width: 100%;
+}
