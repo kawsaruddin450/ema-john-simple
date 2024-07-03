@@ -1,0 +1,35 @@
+.cart {
+    background-color: #FF99004D;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+
+.cart-title {
+    color: #1C2B35;
+
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+}
+
+.cart p {
+    color: #2A414F;
+
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.085px;
+}
+
+.cart-total {
+    color: #0E161A;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.032px;
+}
