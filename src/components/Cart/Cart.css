@@ -33,3 +33,12 @@
     line-height: normal;
     letter-spacing: 0.032px;
 }
+
+.clear-cart-btn {
+    border-radius: 4px;
+    background: #FF3030;
+    width: 100%;
+    font-weight: medium;
+    font-size: 17px;
+    padding: 14px 0;
+}
