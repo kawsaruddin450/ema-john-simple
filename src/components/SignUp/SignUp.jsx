@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const SignUp = () => {
+    const [show, setShow] = useState(false);
     const { createUser } = useContext(AuthContext);
     const [error, setError] = useState('');
 
@@ -41,7 +42,13 @@ const SignUp = () => {
                 </div>
                 <div className="form-control">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" required />
+                    <input type={show ? "text" : "password"} name="password" id="password" required />
+                    <p onClick={()=> setShow(!show)}><small>
+                        {
+                            show ? <span>Hide Password</span> :
+                            <span>Show Password</span>
+                        }    
+                    </small></p>
                 </div>
                 <div className="form-control" id='confirm-cntrl'>
                     <label htmlFor="password">Confirm Password</label>
