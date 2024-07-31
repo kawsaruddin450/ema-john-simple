@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
     const {signInUser} = useContext(AuthContext);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSignIn = event => {
         setError('');
@@ -19,6 +20,8 @@ const Login = () => {
         signInUser(email, password)
         .then(result => {
             const loggedUser = result.user;
+            form.reset();
+            navigate('/');
         })
         .catch(error => {
             setError(error.message);
