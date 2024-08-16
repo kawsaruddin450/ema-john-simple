@@ -13,17 +13,17 @@ const Shop = () => {
     const [cart, setCart] = useState([]);
 
     const handleAddToCart = (product) => {
-        // console.log('Added to Cart', product.id);
+        // console.log('Added to Cart', product._id);
         const newCart = [...cart, product];
         setCart(newCart);
-        addToDb(product.id);
+        addToDb(product._id);
     }
     const handleClearCart = () => {
         setCart([]);
         deleteShoppingCart();
     }
     useEffect(() => {
-        fetch('products.json')
+        fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -31,7 +31,7 @@ const Shop = () => {
         const storedCart = getShoppingCart();
         const savedCart = [];
         for (const id in storedCart) {
-            const savedProduct = products.find(product => product.id === id);
+            const savedProduct = products.find(product => product._id === id);
             if (savedProduct) {
                 const quantity = storedCart[id];
                 savedProduct.quantity = quantity;
@@ -44,7 +44,7 @@ const Shop = () => {
         <div className='shop-container'>
             <div className="products-container">
                 {
-                    products.map(product => <Product key={product.id}
+                    products.map(product => <Product key={product._id}
                         product={product}
                         handleAddToCart={handleAddToCart}
                     ></Product>)
