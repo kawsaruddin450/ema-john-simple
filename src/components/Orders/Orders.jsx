@@ -1,6 +1,5 @@
-import React from 'react';
 import Cart from '../Cart/Cart';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import './Orders.css';
