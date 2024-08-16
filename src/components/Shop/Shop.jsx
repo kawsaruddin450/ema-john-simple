@@ -12,11 +12,12 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const { totalProducts } = useLoaderData();
-    const itemsPerPage = 10;
     const totalPages = Math.ceil(totalProducts / itemsPerPage);
     const pageNumbers = [...Array(totalPages).keys()];
+    const options = [5, 10, 15, 20, 25, 30];
 
     const handleAddToCart = (product) => {
         // console.log('Added to Cart', product._id);
@@ -27,6 +28,11 @@ const Shop = () => {
     const handleClearCart = () => {
         setCart([]);
         deleteShoppingCart();
+    }
+    const handleSelectChange = event => {
+        const selected = parseInt(event.target.value);
+        setItemsPerPage(selected);
+        setCurrentPage(1);
     }
     useEffect(() => {
         fetch('http://localhost:5000/products')
@@ -72,11 +78,20 @@ const Shop = () => {
             <div className='pagination'>
                 {
                     pageNumbers.map(number => <button
-                         key={number}
-                         onClick={()=> setCurrentPage(number + 1)}
+                        key={number}
+                        onClick={() => setCurrentPage(number + 1)}
+                        className={currentPage === number + 1 ? 'selected' : ''}
                     >{number + 1}</button>)
                 }
-                <h4>Current Page: {currentPage}</h4>
+                <select value={itemsPerPage} onChange={handleSelectChange}>
+                    {
+                        options.map(option => (
+                            <option key={option} value={option}>
+                                {option}
+                            </option>
+                        ))
+                    }
+                </select>
             </div>
         </>
     );
