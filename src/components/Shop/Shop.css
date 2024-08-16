@@ -23,3 +23,11 @@
     font-size: 17px;
     margin-top: 16px;
 }
+
+.pagination{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.pagination button{
+    margin-right: 10px;
+}

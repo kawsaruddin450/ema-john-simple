@@ -6,11 +6,17 @@ import Cart from '../Cart/Cart';
 import { addToDb, deleteShoppingCart, getShoppingCart } from '../../utilities/fakedb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const { totalProducts } = useLoaderData();
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(totalProducts / itemsPerPage);
+    const pageNumbers = [...Array(totalPages).keys()];
 
     const handleAddToCart = (product) => {
         // console.log('Added to Cart', product._id);
@@ -41,26 +47,38 @@ const Shop = () => {
         setCart(savedCart);
     }, [products])
     return (
-        <div className='shop-container'>
-            <div className="products-container">
+        <>
+            <div className='shop-container'>
+                <div className="products-container">
+                    {
+                        products.map(product => <Product key={product._id}
+                            product={product}
+                            handleAddToCart={handleAddToCart}
+                        ></Product>)
+                    }
+                </div>
+                <div className="cart-container">
+                    <Cart
+                        cart={cart}
+                        handleClearCart={handleClearCart}
+                    >
+                        <Link to="/orders">
+                            <button className='review-order-btn'>Review Order <FontAwesomeIcon icon={faArrowRight} /></button>
+                        </Link>
+                    </Cart>
+                </div>
+            </div>
+            {/* Pagination */}
+            <div className='pagination'>
                 {
-                    products.map(product => <Product key={product._id}
-                        product={product}
-                        handleAddToCart={handleAddToCart}
-                    ></Product>)
+                    pageNumbers.map(number => <button
+                         key={number}
+                         onClick={()=> setCurrentPage(number + 1)}
+                    >{number + 1}</button>)
                 }
+                <h4>Current Page: {currentPage}</h4>
             </div>
-            <div className="cart-container">
-                <Cart
-                    cart={cart}
-                    handleClearCart={handleClearCart}
-                >
-                    <Link to="/orders">
-                        <button className='review-order-btn'>Review Order <FontAwesomeIcon icon={faArrowRight} /></button>
-                    </Link>
-                </Cart>
-            </div>
-        </div>
+        </>
     );
 };
 
